@@ -1,0 +1,7 @@
+[package]
+name = "selectit"
+version = "0.1.0"
+authors = ["Guilherme Bertuol <bertuol@amazon.com>"]
+
+[dependencies]
+getopts = "0.2.14"
