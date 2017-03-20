@@ -1,13 +1,24 @@
+mod args;
 mod selecta;
 
 use std::io;
 use std::io::BufRead;
+use std::process;
 
 fn main() {
+    let args = match args::parse_args() {
+        Some(args) => args,
+        None => process::exit(1)
+    };
+
+    if args.is_help {
+        return;
+    }
+
     let choices = read_choices();
     let choices = choices.iter().map(|x| &x[..]).collect::<Vec<&str>>();
 
-    let matches = selecta::compute_match(&choices, &"foo");
+    let matches = selecta::compute_match(&choices, &args.query);
     println!("{}", matches.get(0).unwrap_or(&""));
 }
 
