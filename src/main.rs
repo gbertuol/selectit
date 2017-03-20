@@ -1,9 +1,18 @@
+mod selecta;
+
 use std::io;
 use std::io::BufRead;
 
 fn main() {
     let choices = read_choices();
+    let choices = choices.iter().map(|x| &x[..]).collect::<Vec<&str>>();
+
+    let matches = selecta::compute_match(&choices, &"foo");
+    println!("{}", matches.get(0).unwrap_or(&""));
 }
+
+//fn main_loop(choices: &[&str]) -> String {
+//}
 
 fn read_choices() -> Vec<String> {
     let stdin = io::stdin();
